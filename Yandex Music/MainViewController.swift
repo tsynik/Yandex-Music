@@ -125,6 +125,14 @@ extension MainViewController: WKNavigationDelegate {
     
 }
 
+func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    let path = Bundle.main.path(forResource: "init", ofType: "js")!
+    let initJS = try? String(contentsOfFile: path, encoding: String.Encoding.utf8)
+    if (initJS != nil) {
+        webView.evaluateJavaScript(initJS!)
+    }
+}
+
 // MARK: - WebKit UI Delegate
 
 extension MainViewController: WKUIDelegate {
